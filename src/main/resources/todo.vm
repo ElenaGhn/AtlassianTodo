@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            padding: 5px;
+            width: 300px;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Todo List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Description</th>
+        <th>Completed</th>
+    </tr>
+    </thead>
+    <tbody>
+        #foreach ($todo in $todos)
+        <tr class="#if($todo.isComplete()) completed #end">
+            <td>$todo.getDescription()</td>
+            <td>$todo.isComplete()</td>
+        </tr>
+        #end
+    </tbody>
+</table>
+<form action="$req.getContextPath() + '/plugins/servlet/todo'" method="post">
+    <input type="text" name="description" placeholder="New todo">
+    <button type="submit">Add</button>
+</form>
+</body>
+</html>
